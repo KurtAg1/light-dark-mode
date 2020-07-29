@@ -9,6 +9,8 @@
   --on-background-alt: rgba(66, 66, 66, 0.7);
   --background: rgb(255, 255, 255);
   --box-shadow: 0 5px 20px 1px rgba(0, 0, 0, 0.5);
+  --nav-background-light: rgb(255 255 255 / 50%);
+  --text-background-light: rgb(0 0 0 / 50%);
 }
 
 [data-theme="dark"] {
@@ -19,6 +21,8 @@
   --on-background: rgba(255, 255, 255, 0.9);
   --on-background-alt: rgba(255, 255, 255, 0.7);
   --background: #121212;
+  --nav-background-dark: rgb(0 0 0 / 50%);
+  --text-background-dark: rgb(255 255 255 / 50%);
 }
 
 html {

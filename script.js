@@ -6,6 +6,10 @@ const image2 = document.getElementById("image2");
 const image3 = document.getElementById("image3");
 const textBox = document.getElementById("text-box");
 
+// CONSTANTS
+const DARK_THEME = "dark";
+const LIGHT_THEME = "light";
+
 // Dark or Light Images
 function imageMode(color) {
   image1.src = `img/undraw_proud_coder_${color}.svg`;
@@ -13,34 +17,26 @@ function imageMode(color) {
   image3.src = `img/undraw_conceptual_idea_${color}.svg`;
 }
 
-// Dark Mode Styles
-function darkMode() {
-  document.documentElement.setAttribute("data-theme", "dark");
-  nav.style.backgroundColor = "rgb(0 0 0 / 50%)";
-  textBox.style.backgroundColor = "rgb(255 255 255 / 50%)";
-  toggleIcon.children[0].textContent = "Dark Mode";
-  toggleIcon.children[1].classList.replace("fa-sun", "fa-moon");
-  imageMode("dark");
-}
-
-// Light Mode Styles
-function lightMode() {
-  document.documentElement.setAttribute("data-theme", "light");
-  nav.style.backgroundColor = "rgb(255 255 255 / 50%)";
-  textBox.style.backgroundColor = "rgb(0 0 0 / 50%)";
-  toggleIcon.children[0].textContent = "Light Mode";
-  toggleIcon.children[1].classList.replace("fa-moon", "fa-sun");
-  imageMode("light");
+function toggleDarkLightMode(color) {
+  document.documentElement.setAttribute("data-theme", color);
+  nav.style.backgroundColor = `var(--nav-background-${color})`;
+  textBox.style.backgroundColor = `var(--text-background-${color})`;
+  const display = color.charAt(0).toUpperCase() + color.slice(1);
+  toggleIcon.children[0].textContent = `${display} Mode`;
+  color === "dark"
+    ? toggleIcon.children[1].classList.replace("fa-sun", "fa-moon")
+    : toggleIcon.children[1].classList.replace("fa-moon", "fa-sun");
+  imageMode(color);
 }
 
 // Switch Theme Dynamically
 function switchTheme(event) {
   if (event.target.checked) {
     localStorage.setItem("theme", "dark");
-    darkMode();
+    toggleDarkLightMode(DARK_THEME); // Dark Mode
   } else {
     localStorage.setItem("theme", "light");
-    lightMode();
+    toggleDarkLightMode(LIGHT_THEME); // Light Mode
   }
 }
 
@@ -53,6 +49,6 @@ if (currentTheme) {
   // User has a saved theme
   if (currentTheme === "dark") {
     toggleSwitch.checked = true;
-    darkMode();
+    toggleDarkLightMode(DARK_THEME);
   }
 }
